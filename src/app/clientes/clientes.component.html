@@ -1,0 +1,57 @@
+<div class="card border-primary my-3">
+  <div class="card-header">Clients</div>
+  <div class="card-body text-primary">
+    <h5 class="card-title">Liste des Clients</h5>
+
+    <div>
+      <button
+        class="btn btn-rounded btn-primary"
+        type="button"
+        [routerLink]="['/clientes/form']"> <!--Helper que nos ayuda a crear enlaces hacia nuestras rutas internas al proyecto que ya estan registradas en el app.module.ts en el objeto Routes-->
+        Créer un Client
+      </button>
+    </div>
+
+    <div class="text-center text-dark">
+      <h3 *ngIf="clientes?.length==0">Désolé, il n'y a aucun client à afficher</h3>
+    </div>
+
+    <table class="table table-bordered table-striped" *ngIf="clientes?.length > 0">
+      <thead class="bg-dark text-white">
+      <tr>
+        <th>Id</th>
+        <th>Prénom</th>
+        <th>Nom</th>
+        <th>Email</th>
+        <th>Date</th>
+        <th>Modifier</th>
+        <th>Supprimer</th>
+      </tr>
+      </thead>
+      <tbody>
+      <tr *ngFor="let cliente of clientes">
+        <td>{{ cliente.id }}</td>
+        <td>{{ cliente.nombre }}</td>
+        <td>{{ cliente.apellido }}</td>
+        <td>{{ cliente.email }}</td>
+        <td>{{ cliente.createAt }}</td>
+        <td>
+          <button
+            type="button"
+            name="button"
+            [routerLink]="['/clientes/form', cliente.id]"
+            class="btn btn-warning">Modifier</button>
+        </td>
+        <td>
+          <button
+            class="btn btn-danger"
+            type="button"
+            name="eliminar"
+            (click)="delete(cliente)">Supprimer</button>
+        </td>
+      </tr>
+      </tbody>
+    </table>
+
+  </div>
+</div>
